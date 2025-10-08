@@ -2,14 +2,14 @@ try:
     with open("input.txt", "r", encoding="utf-8") as file:
         lines = file.readlines()
 
-    unique_lines = []
-    for line in lines:
-        if line not in unique_lines:
-            unique_lines.append(line)
+    lines = [line.strip() for line in lines]
+
+    unique_once = [line for line in lines if lines.count(line) == 1]
 
     with open("unique_output.txt", "w", encoding="utf-8") as file:
-        file.writelines(unique_lines)
+        for line in unique_once:
+            file.write(line + "\n")
 
-    print("Уникальные строки записаны в unique_output.txt.")
+    print("Строки, встречающиеся один раз, записаны в unique_output.txt.")
 except FileNotFoundError:
     print("Ошибка: файл input.txt не найден.")
